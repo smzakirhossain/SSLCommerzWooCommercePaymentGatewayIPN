@@ -254,7 +254,13 @@ if($code == 200 && !( curl_errno($handle))) {
   $sslcommerzResponse = $content;
   
 # PARSE THE JSON RESPONSE
-$sslcz = json_decode($sslcommerzResponse, true );
+  $sslcz = json_decode($sslcommerzResponse, true );
+ if($sslcz['status']=='FAILED')
+  {
+     echo "FAILED TO CONNECT WITH SSLCOMMERZ API";
+      echo "<br/>Failed Reason: ".$sslcz['failedreason'];
+    exit;
+  }
 } else {
   curl_close( $handle);
   echo "FAILED TO CONNECT WITH SSLCOMMERZ API";
